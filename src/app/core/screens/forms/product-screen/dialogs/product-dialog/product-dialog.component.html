@@ -1,0 +1,164 @@
+<div class="product-form-card">
+  <div id="product-form-card-left">
+    <div class="product-form-image-inner">
+      <div id="product-secondary-images">
+        <carousel [height]="126" [cellWidth]="126">
+          <div class="carousel-cell fit-secondary-image">
+            <label for="secondaryFixedInput" class="image-label">
+              <input type="file" name="secondaryFixedInput" (change)="setAndAddCard($event)" id="secondaryFixedInput">
+              <img class="secondary-images" src="assets/images/produto-sem-imagem.png">
+            </label>
+          </div>
+          <div *ngFor="let image of secondaryImages; let index = index" class="carousel-cell fit-secondary-image">
+            <label for="secondaryInput{{index}}" class="image-label">
+              <input type="file" name="secondaryImage" (change)="setSecondaryImage($event, image, index)" id="secondaryInput{{index}}">
+              <img *ngIf="image.url" class="secondary-images" [src]="image.url" alt="Escolha uma foto">
+              <img *ngIf="!image.url" class="secondary-images" src="assets/images/produto-sem-imagem.png">
+            </label>
+            <div *ngIf="image.url" class="delete-icon" (click)="removeSecondaryImage(image, index)"><mat-icon>delete_forever</mat-icon></div>
+          </div>
+        </carousel>
+      </div>
+      <div id="product-main-image">
+        <label for="imageInput" class="image-label">
+          <input type="file" name="file" (change)="setProductImage($event)" id="imageInput">
+          <img *ngIf="mainImage" [src]="mainImage.url" alt="Imagem">
+          <img *ngIf="!mainImage" class="secondary-images" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+        </label>
+        <mat-error *ngIf="!mainImage && !selectedImage">Imagem principal obrigatória!</mat-error>
+        <div *ngIf="selectedImage != null || mainImage != null" class="delete-icon" (click)="removeMainImage()"><mat-icon>delete_forever</mat-icon></div>
+      </div>
+    </div>
+  </div>
+  <div id="product-form-card-right">
+    <div id="product-form-infos-inner">
+      <div class="form-row-field-product">
+        <mat-form-field id="product-name" class="form-row">
+          <mat-label>Nome do produto</mat-label>
+          <input matInput [formControl]="productNameControl" #input/>
+          <mat-error *ngIf="productNameControl.invalid">Este campo é obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field id="product-price" class="form-row">
+          <mat-label>Valor do produto</mat-label>
+          <input matInput type="number" [min]="0" [max]="99999" [formControl]="productValueControl" (keydown)="onKeyDown($event)" #input/>
+          <mat-error *ngIf="productValueControl.invalid">Este campo é obrigatório!</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row-field-desc">
+        <mat-form-field class="form-row-100">
+          <mat-label>Descrição do produto</mat-label>
+          <textarea matInput [formControl]="productDescControl" #input></textarea>
+          <mat-error *ngIf="productDescControl.invalid">Este campo é obrigatório!</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row-field-category">
+        <mat-form-field class="row-form-field" appearance="fill">
+          <mat-label>Categories</mat-label>
+          <mat-chip-grid #chipGridCategory aria-label="Fruit selection">
+            <mat-chip-row
+              *ngFor="let category of selectedCategories"
+              (removed)="removeCategory(category)">
+              {{category.categoryName}}
+              <button matChipRemove [attr.aria-label]="'remove ' + category.categoryName">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+          <input placeholder="New Category..." #categoryInput [formControl]="categoryCtrl"
+            [matChipInputFor]="chipGridCategory" [matAutocomplete]="autoCategory"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"/>
+          <mat-error *ngIf="chipGridCategory.errorState">Informe pelo menos uma categoria!</mat-error>
+          <mat-autocomplete #autoCategory="matAutocomplete" [displayWith]="displayCategory" (optionSelected)='setCategoryDataTable($event)'>
+            <mat-option *ngFor="let category of filteredCategoryOptions | async" [value]="category">
+              {{category.categoryName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <mat-checkbox [formControl]="inStockControl" value="true" color="primary">Disponível</mat-checkbox>
+
+      <div class="form-row-field">
+        <mat-card class="card-row-product-infos">
+          <mat-card-header>
+            <mat-card-title>Informações do Produto</mat-card-title>
+            <mat-card-subtitle>Cor + Tamanho + Quantidade</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="card-table-product-infos">
+              <div class="card-infos">
+                <mat-form-field>
+                  <mat-label>Cor</mat-label>
+                  <mat-select [formControl]="colorControl">
+                    <mat-option *ngFor="let color of colors" [value]="color">
+                      {{color.colorName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Tamanho</mat-label>
+                  <mat-select [formControl]="sizeControl">
+                    <mat-option *ngFor="let size of sizes" [value]="size">
+                      {{size.sizeName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <input type="number" [min]="0" [max]="9999" [formControl]="quantityControl" (keydown)="onKeyDown($event)" #input>
+
+                <button mat-button (click)="addProductInfo()"><mat-icon>add_circle</mat-icon></button>
+              </div>
+
+              <mat-divider></mat-divider>
+
+              <table mat-table matSort [dataSource]="dataSourceProductInfos" class="mat-elevation-z8 product-info-table">
+                <ng-container matColumnDef="color">
+                  <th mat-header-cell *matHeaderCellDef> Cor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.color.colorName}} : <input type="color" readonly [(ngModel)]="element.color.colorHex"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="size">
+                  <th mat-header-cell *matHeaderCellDef> Tamanho </th>
+                  <td mat-cell *matCellDef="let element"> {{element.size.sizeName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+                  <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef>  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-button (click)="removeInfo(element)">Remover</button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedProductInfosColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedProductInfosColumns;"></tr>
+              </table>
+              <mat-paginator
+                [showFirstLastButtons]="true"
+                (page)="handlePageProductInfo($event)"
+                [pageSize]="pageHandlerProductInfo.pageSize"
+                [length]="pageHandlerProductInfo.totalSize"
+                [pageIndex]="pageHandlerProductInfo.pageIndex"
+                aria-label="Select page of product infos"
+              ></mat-paginator>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="floating-div">
+  <button (click)="closeDialog()">Voltar</button>
+  <button (click)="saveProduct()">Salvar produto</button>
+</div>

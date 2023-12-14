@@ -1,0 +1,32 @@
+
+radio-container {
+  display: flex;
+}
+
+.radio-teste {
+  cursor: pointer;
+  appearance: none; /* Remove o estilo padrão do navegador */
+  width: 20px; /* Defina a largura desejada */
+  height: 20px; /* Defina a altura desejada */
+  border-radius: 50%; /* Torna o botão redondo */
+  border: 1px solid #393939; /* Adicione uma borda para melhor visibilidade */
+  margin-left: 10px; /* Adicione um espaçamento entre os botões de rádio */
+  background-color: #fff; /* Cor de fundo branca para o espaço ao redor da bola */
+  box-shadow: 0 0 0 5px #fff; /* Adiciona uma borda branca ao redor da bola */
+  transition: opacity 0.3s, box-shadow 0.3s; /* Adiciona transição suave para a mudança de opacidade e sombra */
+}
+
+
+.radio-teste {
+  padding: 1px;
+  background-color: var(--selected-color, #3498db); /* Cor padrão ou cor selecionada */
+  border-color: #000000;
+}
+
+.radio-teste:checked {
+  opacity: 1; /* Quando selecionado, a opacidade é 1 (totalmente opaco) */
+}
+
+.radio-teste:not(:checked) {
+  opacity: 0.5; /* Quando não selecionado, a opacidade é 0.5 (meio transparente) */
+}

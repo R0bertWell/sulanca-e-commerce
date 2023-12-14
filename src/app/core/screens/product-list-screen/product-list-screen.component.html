@@ -1,0 +1,72 @@
+<!--
+<div id="products-section">
+  <div class="product-cards" *ngIf="PRODUCT_DATA.length > 0; else nonData">
+    <div class="product-card" (click)="goToProductDetails(product)" *ngFor="let product of PRODUCT_DATA; let i = index;">
+      <div class="product-image">
+        <img mat-card-image *ngIf="product.images.length > 0" src="{{product.images[0].imagePath}}" alt="Photo of a Shiba Inu">
+      </div>
+      <div class="product-info">
+        <div class="product-name">
+          {{product.productName}}
+        </div>
+        <div class="product-price">
+          <b>R${{product.productValue}}</b>
+        </div>
+      </div>
+      <div class="product-card-action">
+        <button mat-button (click)="goToProductDetails(product)">Ver produto</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #nonData>
+    <p>Não há produtos há exibir para categoria selecionada.</p>
+  </ng-template>
+</div>
+<mat-paginator class="custom-mat-paginator"
+(page)="handlePage($event)"
+[pageSize]="pageHandlerProduct.pageSize"
+[length]="pageHandlerProduct.totalSize"
+[pageIndex]="pageHandlerProduct.pageIndex"
+aria-label="Select page of products"
+></mat-paginator>-->
+<input type="file" (change)="uploadImage($event)">
+
+<div *ngIf="PRODUCTS_TAGGEDS.length > 0" class="products-tag-section">
+  <div *ngFor="let product_tagged of PRODUCTS_TAGGEDS" class="product-tag-container">
+    <div class="head">
+      <h2 class="subtitle">{{product_tagged.category.categoryName}}</h2>
+    </div>
+    <carousel [height]="carousel_height" [margin]="12" style="margin-bottom: 100px;" [arrowsTheme]="'dark'" [counter]="true" [cellWidth]="carousel_cell_width" >
+      <div *ngFor="let product of product_tagged.products" (click)="goToProductDetails(product)" class="carousel-cell">
+        <div class="image-content" [ngStyle]="{'width': carousel_cell_width + 'px', height: carousel_cell_width + 'px'}" >
+          <img class="image-carousel" *ngIf="product.images.length > 0" [src]="product.images[0].imagePath">
+          <img *ngIf="product.images.length == 0" class="image-carousel" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+        </div>
+        <div class="product-content">
+          <h3>{{product.productName}}</h3>
+          <div class="product-price">
+            R$&nbsp;{{product.productValue}}
+          </div>
+        </div>
+      </div>
+    </carousel>
+  </div>
+</div>
+<h2>Vestidos</h2>
+<carousel [height]="300" [cellWidth]="190" [dots]="true">
+    <div *ngFor="let image of images" class="carousel-cell">
+      <div class="image-content">
+        <img class="image-carousel" [src]="image.path">
+      </div>
+      <div class="product-content">
+        <div>
+          Produto teste
+        </div>
+        <div>
+          R$50.00
+        </div>
+      </div>
+    </div>
+</carousel>
+
+

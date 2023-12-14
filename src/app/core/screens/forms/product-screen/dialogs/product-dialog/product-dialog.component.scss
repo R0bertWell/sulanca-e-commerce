@@ -1,0 +1,367 @@
+/* Adicione as classes do Angular Material para estilizar os campos de formulário */
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mat-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.mat-input-element {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+/* Estilos para realçar os campos de formulário quando focados */
+.mat-input-element:focus {
+  border-color: #007bff;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+// table
+.demo-table {
+  width: 100%;
+}
+
+.mat-column-demo-id {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-demo-productName {
+  padding-left: 16px;
+  font-size: 20px;
+}
+
+.mat-column-demo-productDesc {
+  font-style: italic;
+}
+
+.mat-column-demo-productValue {
+  width: 32px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+// Form css
+.card-row-product-infos {
+  font-size: 2em;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.form-row-100 {
+  width: 100%;
+}
+
+.row-form-field {
+  width: 100%;
+}
+
+
+// css teste below
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.product-expanded-detail{
+  width: 20%;
+}
+
+.product-expanded-detail img{
+  width: 90%;
+  height: 90%;
+}
+
+.product-expanded-detail-infos {
+  width: 80%;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+// New
+
+.product-form-card {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-around;
+  padding: 25px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#product-form-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  padding-left: 5%;
+}
+
+.product-form-image {
+  width: 100%;
+  height: 50vh;
+}
+
+
+.product-form-image-inner {
+  width: 90%;
+  display: flex;
+  height: 65vh;
+  flex-direction: column;
+}
+
+.product-form-image-inner #product-secondary-images {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.product-form-image-inner #product-main-image {
+
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 100%;
+  height: 65%;
+}
+
+.product-form-image-inner #product-images-carousel {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.product-form-image-inner #product-secondary-images .fit-secondary-image .image-label {
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-form-image-inner #product-secondary-images .fit-secondary-image input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.fit-secondary-image {
+  margin: 5px;
+  position: relative;
+  width: 25%;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.secondary-images {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: fill !important;
+}
+
+.product-form-image-inner #product-main-image img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.product-form-image-inner #product-main-image .image-label {
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-form-image-inner #product-main-image input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.product-form-inner{
+  display: flex;
+  width: 90%;
+}
+
+#product-form-desc {
+  width: 100%;
+}
+
+#product-form-card-right {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  padding-right: 5%;
+}
+
+#product-form-infos-inner {
+  padding: 10px;
+}
+
+#product-form-card-right #product-form-infos-inner .form-row-field-category{
+  width: 100%;
+}
+
+#product-form-card-right #product-form-infos-inner .form-row-field-product {
+  width: 100%;
+}
+
+#product-form-card-right #product-form-infos-inner .form-row-field-product #product-name{
+  width: 70%;
+  margin-right: 5px;
+}
+
+#product-form-card-right #product-form-infos-inner .form-row-field-product #product-price{
+  margin-left: 5px;
+  width: 30%;
+}
+
+#product-form-card-right #product-form-infos-inner .form-row-field-desc {
+  width: 100%;
+}
+
+.card-infos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.row-form-field-info {
+  height: 50px;
+  width: 20%;
+}
+
+
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+// Product Info
+
+.product-info-table {
+  font-size: 2rem;
+}
+
+
+@media only screen and (max-width: 1100px) {
+  .product-form-card {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  #product-form-card-left {
+    width: 100%;
+    padding: 0;
+  }
+
+  #product-form-card-right {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.floating-div {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(247, 244, 244);
+  color: black;
+  padding: 10px;
+  margin: 10px;
+  z-index: 9999;
+}

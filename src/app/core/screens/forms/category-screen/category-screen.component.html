@@ -1,0 +1,38 @@
+<table mat-table matSort [dataSource]="dataSourceCategories" class="mat-elevation-z8">
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef> Categoria </th>
+    <td mat-cell *matCellDef="let element"> {{element.categoryName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nrOrder">
+    <th mat-header-cell *matHeaderCellDef> Ordem </th>
+    <td mat-cell *matCellDef="let element"> {{element.nrOrder}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="editCategory(element)">Editar</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="askRemoveCategory(element)">Remover</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedCategoryColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedCategoryColumns;"></tr>
+</table>
+<mat-paginator
+  [showFirstLastButtons]="true"
+  (page)="handlePageCategory($event)"
+  [pageSize]="pageHandlerCategory.pageSize"
+  [length]="pageHandlerCategory.totalSize"
+  [pageIndex]="pageHandlerCategory.pageIndex"
+  aria-label="Select page of categories"
+></mat-paginator>
+
+<button mat-button (click)="chamadaDialog()">Chama dialog</button>

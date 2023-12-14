@@ -1,0 +1,146 @@
+<div style="display: flex; justify-content: center; align-items: center;">
+<b><h5><a href="">Produtos</a></h5></b> < Detalhe do Produto
+</div>
+<div class="product-form-card">
+  <div id="product-form-card-left">
+    <div class="product-form-image-inner">
+      <div id="product-secondary-images" *ngIf="product.images.length > 1">
+        <carousel [height]="126">
+          <div *ngFor="let image of product.images; let index = index" class=" carousel-cell fit-secondary-image">
+            <label *ngIf="image && image.imagePath" (click)="openImageViewer(image.imagePath)" class="image-label">
+              <img class="secondary-images"  src="{{image.imagePath}}">
+            </label>
+          </div>
+        </carousel>
+      </div>
+      <div id="product-main-image">
+        <label *ngIf="product.images.length > 0 && product.images[0] && product.images[0].imagePath" (click)="openImageViewer(product.images[0].imagePath)" for="imageInput" class="image-label">
+          <img mat-card-image *ngIf="product.images.length > 0" src="{{product.images[0].imagePath}}" alt="Photo of a Shiba Inu">
+        </label>
+        <img *ngIf="product.images.length == 0" class="image-carousel" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+      </div>
+    </div>
+  </div>
+  <div id="product-form-card-right">
+    <div class="form-row-field-product">
+      <div class="product-detail-info">
+        <h1>{{product.productName}}</h1>
+        <p>{{product.productDesc}}</p>
+      </div>
+
+      <div class="product-buy-infos">
+        <div class="color-wrapper">
+          <p class="option-title">
+            <mat-icon>color_lens</mat-icon>
+            Cor
+          </p>
+          <app-radio-color [colorArray]="colors" [formControl]="colorControl"></app-radio-color>
+        </div>
+        <div class="size-wrapper">
+          <p class="option-title">
+            <mat-icon>straighten</mat-icon>
+            Tamanho
+          </p>
+          <mat-button-toggle-group id="size-button-group" [(ngModel)]="size" name="sizes" [formControl]="sizeControl">
+            <mat-button-toggle class="size-buttons" *ngFor="let size of sizes" [value]="size">{{size.sizeName}}</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="quantity-wrapper">
+          <div class="quantity-modal">
+            <button class="quantity-modal-btns" (click)="decrement()">-</button>
+            <input class="quantity-input" type="number" [min]="1" readonly [(ngModel)]="quantity">
+            <button class="quantity-modal-btns" (click)="increment()">+</button>
+          </div>
+        </div>
+
+        <!--
+        <mat-form-field class="info-form-field">
+          <mat-label>Cor</mat-label>
+          <mat-select [formControl]="colorControl">
+            <mat-option *ngFor="let color of colors" [value]="color">
+              {{color.colorName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="colorControl.invalid">Informe a cor!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="info-form-field">
+          <mat-label>Tamanho</mat-label>
+          <mat-select [disabled]="!color" [formControl]="sizeControl">
+            <mat-option *ngFor="let size of sizes" [value]="size">
+              {{size.sizeName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sizeControl.invalid">Informe o tamanho!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="info-form-field">
+          <mat-label>Quantidade</mat-label>
+          <mat-select [disabled]="!color || !size" [formControl]="quantityControl">
+            <mat-option *ngFor="let quantity of quantities" [value]="quantity">
+              {{quantity}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="sizeControl.invalid">Informe a quantidade!</mat-error>
+        </mat-form-field>
+      -->
+      </div>
+      <div class="product-button-action">
+        <button mat-button (click)="addToCart()">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="product-detail-card">
+  <div class="product-detail-image-card">
+    <div class="product-image">
+      <img mat-card-image *ngIf="product.images.length == 0" src="http://192.168.1.2:8080/images/imageteste.png" alt="Photo of a Shiba Inu">
+      <img mat-card-image *ngIf="product.images.length > 0" src="http://192.168.1.2:8080/{{product.images[0].imagePath}}" alt="Photo of a Shiba Inu">
+
+    </div>
+    <div *ngFor="let image of product.images">
+      <img *ngIf="!image.mainImage" src="http://192.168.1.2:8080/{{image.imagePath}}">
+    </div>
+  </div>
+
+  <div class="product-detail-infos">
+    <div class="product-detail-info">
+      <h1>{{product.productName}}</h1>
+      <p>{{product.productDesc}}</p>
+    </div>
+
+    <div class="product-buy-infos">
+      <mat-form-field>
+        <mat-label>Cor</mat-label>
+        <mat-select [formControl]="colorControl">
+          <mat-option *ngFor="let color of colors" [value]="color">
+            {{color.colorName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="color">
+        <mat-label>Tamanho</mat-label>
+        <mat-select [formControl]="sizeControl">
+          <mat-option *ngFor="let size of sizes" [value]="size">
+            {{size.sizeName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="color && size">
+        <mat-label>Quantidade</mat-label>
+        <mat-select [formControl]="quantityControl">
+          <mat-option *ngFor="let quantity of quantities" [value]="quantity">
+            {{quantity}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="product-button-action">
+      <button mat-button (click)="addToCart()">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+-->

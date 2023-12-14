@@ -1,0 +1,13 @@
+<div class="radio-container">
+  <input mat-input
+  *ngFor="let color of colorArray"
+  [formControl]="formControl"
+  matTooltip="{{color.colorName}}"
+  [matTooltipPosition]="'above'"
+  class="radio-teste"
+  type="radio"
+  [(ngModel)]="colorPicker"
+  [value]="color"
+  style="--selected-color: {{color.colorHex}}"
+  >
+</div>

@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <formly-form [form]="form" [fields]="fields" [options]="options" [model]="category_data"></formly-form>
+
+  <div class="form-container">
+    <mat-form-field id="form-category-name">
+      <mat-label>Nome da categoria</mat-label>
+      <input matInput oninput="this.value= this.value.toUpperCase()" name="categoryName" type="string" [maxLength]="20" [formControl]="categoryNameControl" #categoryNameInput>
+      <mat-error *ngIf="categoryNameControl.invalid">Campo obrigatório!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field id="form-category-name">
+      <mat-label>Ordem de exibição</mat-label>
+      <input matInput type="number" [min]="1" name="nrOrder" [maxLength]="12" [formControl]="nrOrderControl" #nrOrderInput>
+      <mat-error *ngIf="nrOrderControl.invalid">Ordem obrigatória!</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button [tabindex]="-1" (click)="save()">Salvar</button>
+  <button mat-raised-button [tabindex]="1" (click)="cancel()">Cancelar</button>
+</mat-dialog-actions>
+

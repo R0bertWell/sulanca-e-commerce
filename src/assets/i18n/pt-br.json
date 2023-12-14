@@ -1,0 +1,12 @@
+{
+  "pagination": {
+  "firstPage": "Primeira página",
+  "lastPage": "Última página",
+  "itensPerPage": "Itens por página:",
+  "nextPage": "Próxima página",
+  "previousPage": "Página anterior",
+  "ofLabel": "de",
+  "next": "Próximo",
+  "previous": "Anterior"
+  }
+}

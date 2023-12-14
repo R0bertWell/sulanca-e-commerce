@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <formly-form [form]="form" [fields]="fields" [options]="options" [model]="size_data"></formly-form>
+
+  <div class="form-container">
+    <mat-form-field id="form-size-name">
+      <mat-label>Nome do tamanho</mat-label>
+      <input matInput oninput="this.value= this.value.toUpperCase()" name="sizeName" type="string" [maxLength]="20" [formControl]="sizeNameControl" #sizeNameInput>
+      <mat-error *ngIf="sizeNameControl.invalid">Campo obrigatório!</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button [tabindex]="-1" (click)="save()">Salvar</button>
+  <button mat-raised-button [tabindex]="1" (click)="cancel()">Cancelar</button>
+</mat-dialog-actions>
+

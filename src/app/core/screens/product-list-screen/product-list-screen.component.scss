@@ -1,0 +1,192 @@
+#products-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px 20px 100px 20px;
+}
+
+.product-content-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.product-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-card {
+  height: 400px;
+  width: 375px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.product-card .product-info {
+  height: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card .product-info .product-name{
+  width: 100%;
+  font-size: 1em;
+}
+
+.product-card .product-info .product-price{
+  width: 100%;
+  float: left;
+  font-size: 0.9em;
+}
+
+
+.product-card .product-card-action {
+  display: flex;
+  justify-content: center;
+  height: 10%;
+}
+
+.product-image {
+  overflow: hidden;
+  flex: 1;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 10px;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.product-category-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-category-section button {
+  padding: 8px 12px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.product-category-section button.selected {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.custom-mat-paginator {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+
+@media only screen and (max-width: 900px) {
+  #products-section {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .product-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-card {
+    width: 50%;
+    border-radius: 5px;
+  }
+
+  //carousel
+  .head h2 {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: #e5a733;
+  }
+}
+.carousel {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.carousel .carousel-container{
+  display: flex;
+  align-items: center;
+}
+
+.carousel .carousel-container .carousel-cells{
+  display: flex;
+  align-items: center;
+}
+
+
+.image-carousel{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill !important;
+}
+
+.carousel-cell{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.carousel-cell .image-content{
+  overflow: hidden;
+  //flex: 1;
+  //height: 70%;
+}
+
+.carousel-cell .product-content {
+  height: 30%;
+}
+
+.carousel-cell .product-content h3 {
+  font-size: 1.17rem;
+}
+
+.head {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin: 0 auto 2rem;
+  max-width: 80%;
+  text-align: center;
+  font-size: 2.4rem;
+  line-height: 1.2;
+  color: #e5a733;
+
+}
+
+
+

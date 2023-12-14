@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+  <formly-form [form]="form" [fields]="fields" [options]="options" [model]="color_data"></formly-form>
+
+  <div class="form-container">
+    <mat-form-field id="form-color-name">
+      <mat-label>Nome da cor</mat-label>
+      <input matInput oninput="this.value= this.value.toUpperCase()" name="colorName" type="string" [maxLength]="20" [formControl]="colorNameControl" #colorNameInput>
+      <mat-error *ngIf="colorNameControl.invalid">Campo obrigatório!</mat-error>
+    </mat-form-field>
+    <mat-form-field id="form-color-picker">
+      <mat-label>Cor</mat-label>
+      <input matInput type="color" name="colorHex" [formControl]="colorHexControl" #colorHexInput>
+      <mat-error *ngIf="colorHexControl.invalid">Campo obrigatório!</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button [tabindex]="-1" (click)="save()">Salvar</button>
+  <button mat-raised-button [tabindex]="1" (click)="cancel()">Cancelar</button>
+</mat-dialog-actions>
+

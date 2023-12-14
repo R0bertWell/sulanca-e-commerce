@@ -1,0 +1,38 @@
+<table mat-table matSort [dataSource]="dataSourceColors" class="mat-elevation-z8">
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef> Cor </th>
+    <td mat-cell *matCellDef="let element"> {{element.colorName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="hex">
+    <th mat-header-cell *matHeaderCellDef> Hex </th>
+    <td mat-cell *matCellDef="let element"><input type="color" [disabled]="true" [(ngModel)]="element.colorHex"></td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="editColor(element)">Editar</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="removeColor(element)">Remover</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColorColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColorColumns;"></tr>
+</table>
+<mat-paginator
+  [showFirstLastButtons]="true"
+  (page)="handlePageColor($event)"
+  [pageSize]="pageHandlerColor.pageSize"
+  [length]="pageHandlerColor.totalSize"
+  [pageIndex]="pageHandlerColor.pageIndex"
+  aria-label="Select page of colors"
+></mat-paginator>
+
+<button mat-button (click)="chamadaDialog()">Chama dialog</button>
