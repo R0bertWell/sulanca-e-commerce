@@ -1,0 +1,118 @@
+.ticket {
+  margin: 40px auto;
+  max-width: 577px;
+  min-width: 355px;
+  padding: 0 26px;
+  text-align: center;
+}
+
+.ticket__header {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.ticket__line {
+  background-color: rgb(39, 42, 44);
+  border-color: initial;
+  color: rgb(216, 212, 207);
+}
+
+// andes card
+
+.andes-card--outline {
+  border-color: rgba(140, 130, 115, 0.1);
+}
+
+.andes-card {
+  background-color: rgb(24, 26, 27);
+}
+
+.andes-card--outline {
+  border: 1px solid rgba(0,0,0,.1);
+}
+
+.andes-card {
+  background-color: #fff;
+  border-radius: 6px;
+  font-family: Proxima Nova,-apple-system,Roboto,Arial,sans-serif;
+}
+
+.ticket__section {
+  padding: 16px;
+}
+
+.ticket__title {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.ticket__code-instruction {
+  margin: 32px 0 16px;
+  text-align: start;
+}
+
+.ticket__code {
+  margin-top: 24px;
+}
+
+.ticket__small-text {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.ticket__qrcode-image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ticket__qrcode-canva--desktop {
+  width: 200px;
+}
+
+.ticket__plaincode {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket__plaincode-value {
+  align-items: center;
+  align-self: stretch;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  display: flex;
+  height: 48px;
+  justify-content: space-between;
+  margin-top: 5px;
+  padding: 0 10px;
+  word-break: break-all;
+}
+
+.ticket__extralarge-text--lighter {
+  font-size: 16px;
+  font-weight: lighter;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket__plaincode-value svg {
+  height: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  transition: filter .2s;
+  width: 16px;
+}
+
+.ticket__instruction {
+  margin: 16px 0;
+}
+
+.copy-value{
+  cursor: pointer;
+}

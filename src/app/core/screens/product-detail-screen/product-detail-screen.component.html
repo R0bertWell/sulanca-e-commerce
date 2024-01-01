@@ -5,7 +5,7 @@
   <div id="product-form-card-left">
     <div class="product-form-image-inner">
       <div id="product-secondary-images" *ngIf="product.images.length > 1">
-        <carousel [height]="126">
+        <carousel [height]="126" [cellWidth]="126">
           <div *ngFor="let image of product.images; let index = index" class=" carousel-cell fit-secondary-image">
             <label *ngIf="image && image.imagePath" (click)="openImageViewer(image.imagePath)" class="image-label">
               <img class="secondary-images"  src="{{image.imagePath}}">
@@ -17,7 +17,7 @@
         <label *ngIf="product.images.length > 0 && product.images[0] && product.images[0].imagePath" (click)="openImageViewer(product.images[0].imagePath)" for="imageInput" class="image-label">
           <img mat-card-image *ngIf="product.images.length > 0" src="{{product.images[0].imagePath}}" alt="Photo of a Shiba Inu">
         </label>
-        <img *ngIf="product.images.length == 0" class="image-carousel" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+        <img *ngIf="product.images.length == 0" class="image-carousel" src="assets/images/produto-sem-imagem.png">
       </div>
     </div>
   </div>
@@ -26,6 +26,9 @@
       <div class="product-detail-info">
         <h1>{{product.productName}}</h1>
         <p>{{product.productDesc}}</p>
+        <div class="price-wrapper">
+          <h2>R$&nbsp;{{product.productValue}}</h2>
+        </div>
       </div>
 
       <div class="product-buy-infos">

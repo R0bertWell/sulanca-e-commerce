@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Cart } from './models/cart.model';
 import { ProductInfo } from 'src/app/core/screens/forms/product-screen/models/product-info.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -7,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class CartService {
+
   private cartItems: ProductInfo[] = [];
 
   constructor(public _snackBar: MatSnackBar) {
@@ -48,10 +48,17 @@ export class CartService {
     if(pInfoIndex !== -1){
       this.cartItems.splice(pInfoIndex, 1);
     }
+
+    this.saveCartToLocalStorage();
   }
 
   getCartItems() {
     return this.cartItems;
+  }
+
+  removeAll(){
+    this.cartItems = [];
+    this.saveCartToLocalStorage();
   }
 
   private saveCartToLocalStorage() {

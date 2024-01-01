@@ -1,51 +1,59 @@
-<div class="cart-section">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-    <ng-container matColumnDef="product">
-      <th mat-header-cell *matHeaderCellDef> Produto </th>
-      <td mat-cell *matCellDef="let element"> {{element.product.productDesc}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef> Cor </th>
-      <td mat-cell *matCellDef="let element"> {{element.color.colorName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef> Tamanho </th>
-      <td mat-cell *matCellDef="let element"> {{element.size.sizeName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <button (click)="sendOrder()">Enviar pedido</button>
-
-</div>
-
 <div id="cart-content">
-  <div class="product-info-content">
-    <div *ngFor="let productInfo of PRODUCT_INFO_DATA" class="product">
+  <div id="cart__header">
+    Carrinho de compras
+    <button (click)="closeNav()">Close</button>
+    <button *ngIf="!cartIsEmpty" (click)="cleanCart()">Limpar Carrinho</button>
+
+  </div>
+  <mat-divider></mat-divider>
+  <div class="cart__products" *ngIf="PRODUCT_INFO_DATA.length > 0;else empty_cart">
+    <div *ngFor="let productInfo of PRODUCT_INFO_DATA" class="product" style="margin-bottom: 10px;">
       <div class="product-infos">
         <div class="product-image-fit">
-          <img *ngIf="productInfo.product.images.length > 0" class="secondary-images" [src]="productInfo.product.images[0].imagePath">
+          <label class="product-image-label">
+            <img *ngIf="productInfo.product.images.length > 0" class="secondary-images" [src]="productInfo.product.images[0].imagePath">
+          </label>
         </div>
         <div class="product-info">
-          <h3>{{productInfo.product.productName}}</h3>
-          <h3>R$: {{productInfo.product.productValue}}</h3>
-          <hr>
-          <p>Color : {{productInfo.color.colorName}}</p>
-          <p>Tamanho : {{productInfo.size.sizeName}}</p>
-          <p>Quantidade : {{productInfo.quantity}}</p>
+          <p>
+            <a>{{productInfo.product.productName}}</a>
+          </p>
+          <div>
+            <span>Cor: {{productInfo.color.colorName}}| Tam: {{productInfo.size.sizeName}} | Quant: {{productInfo.quantity}}</span>
+            <span><h3>R$: {{productInfo.product.productValue}}</h3></span>
+          </div>
         </div>
-        <button mat-button (click)="removeFromCart(productInfo)">Remover do carrinho</button>
+        <button mat-button (click)="removeFromCart(productInfo)"><mat-icon>remove_shopping_cart</mat-icon></button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <ng-template #empty_cart>
+    Seu carrinho está vazio!
+  </ng-template>
+
+  <mat-divider></mat-divider>
+  <div id="cart__resume" *ngIf="PRODUCT_INFO_DATA.length">
+      <div id="cart__total-value">
+        <p class="cart-drawer-text-sm cart-drawer-font-semibold">Subtotal</p>
+        <p class="cart-drawer-text-xs cart-drawer-text-right">R$ {{totalValue}}</p>
       </div>
       <mat-divider></mat-divider>
-    </div>
+      <div id="cart__excursion">
+        <mat-form-field style="width: 100%; padding: 10px 0px;">
+          <mat-label>Excursão</mat-label>
+          <input matInput type="text" [formControl]="excursionControl" #excursionInput>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <div id="cart__finalize">
+        <button class="cart__button_finalize" (click)="sendOrder()">
+          <span>Finalizar pedido</span>
+          <span>R$ {{totalValue}}</span>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <button type="button" class="cart__button-continue-buying" (click)="closeNav()" aria-label="Dismiss">Continuar comprando</button>
   </div>
 </div>

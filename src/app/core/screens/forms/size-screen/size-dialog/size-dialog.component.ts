@@ -72,13 +72,13 @@ export class SizeDialogComponent {
 
           this.dialogRef.close(true);
         },
-        error: (response: any) => {
-          this._snackBar.open(response.error.message, "Ok", {
+        error: (error: any) => {
+          this._snackBar.open(error, "Ok", {
             duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
           })
-          console.log("Sucesso => ERR ", response)
+          console.log("Sucesso => ERR ", error)
         }
       })
     } else {

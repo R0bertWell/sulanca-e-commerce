@@ -1,0 +1,122 @@
+<div id="layout-config">
+  <div class="layout-config__configs">
+    <div class="layout-config__header-config">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Header</mat-card-title>
+            <mat-card-subtitle>Configuração</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Selecione uma cor</mat-label>
+            <input matInput type="color" [formControl]="bgHeaderColorControl">
+          </mat-form-field>
+          <p>OBS: Caso queira mudar a logo, clique na imagem da logo</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="layout-config__content">
+      <mat-card class="layout-config__container__cor_image">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Background</mat-card-title>
+            <mat-card-subtitle>Configuração</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group [formControl]="backgroundContentControl" >
+            <mat-radio-button *ngFor="let conf of backgroundConfig" [value]="conf.value">{{conf.desc}}</mat-radio-button>
+          </mat-radio-group>
+          <div class="layout-config__container__cor">
+            <mat-form-field>
+              <mat-label>Cor de fundo: </mat-label>
+              <input matInput type="color" [formControl]="bgContentColorControl">
+            </mat-form-field>
+          </div>
+          <div class="layout-config__container__image">
+            <label>Imagem de fundo: </label>
+            <input type="file" (change)="setBgContainerImage($event)">
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="layout-config__footer">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Footer</mat-card-title>
+            <mat-card-subtitle>Configuração</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Selecione uma cor</mat-label>
+            <input matInput type="color" [formControl]="bgFooterColorControl">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="layout-config__preview">
+    <div class="layout-config__preview-container">
+      <header id="layout-config__header">
+        <nav id="navbar" [style.backgroundColor]="navbar__bgColor">
+          <div class="navbar__container">
+            <div class="navbar__logo" [matTooltipPosition]="'above'" matTooltip="Selecione sua logo!">
+              <label for="logoInput" class="navbar__brand">
+                <img [src]="your_logo" alt="Logo" class="navbar__logo-brand">
+                <input id="logoInput" class="navbar__logo-input" type="file" (change)="changeHeaderLogo($event)" alt="Escolha a logo">
+              </label>
+            </div>
+            <div class="header__right-buttons">
+              <button mat-button><mat-icon>person</mat-icon></button>
+              <button class="cart-button">
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <content id="layout-config__container"  [style.backgroundColor]="content_bgColor" [style.backgroundImage]="layoutConfig_TO_UPDATE.snBgColor ? '' : content_bgImg">
+        <div class="layout-config__carousels">
+          <div class="layout-config_carousel-title">
+            <h2>Categoria 1#</h2>
+          </div>
+
+          <div class="layout-config__carousel-container">
+            <carousel class="layout-config__carousel" [margin]="12" [height]="150" [dots]="true">
+              <div *ngFor="let image of images" class="carousel-cell">
+                <img [src]="image">
+              </div>
+            </carousel>
+          </div>
+
+          <div class="layout-config_carousel-title">
+            <h2>Categoria 2#</h2>
+          </div>
+
+          <div class="layout-config__carousel-container">
+            <carousel class="layout-config__carousel" [margin]="12" [height]="150" [dots]="true">
+              <div *ngFor="let image of images" class="carousel-cell">
+                <img [src]="image">
+              </div>
+            </carousel>
+          </div>
+        </div>
+        <div class="__only-spacing"></div>
+      </content>
+      <footer id="layout-config__footer" [style.backgroundColor]="footer__bgColor">
+        <div class="layout-config__footer-brand">
+          <img [src]="footer_logo" alt="Logo" class="footer-brand">
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<div class="floating-div">
+  <button (click)="resetLayoutConfig()">Voltar Configurações</button>
+  <button (click)="updateLayoutConfig()">Atualizar configurações</button>
+</div>

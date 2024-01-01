@@ -4,6 +4,7 @@ import { Observable, filter } from 'rxjs';
 import { Category } from '../models/category.model';
 import { Product, ProductRequired } from '../models/product.model';
 import { Color, ProductInfo, Size } from '../models/product-info.model';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ import { Color, ProductInfo, Size } from '../models/product-info.model';
 export class ProductScreenService {
 
   //private apiLocalUrl = "http://localhost:8080"
-  private apiLocalUrl = "http://192.168.1.2:8080"
-  private apiUrlSaveCategory = '/category/save'; // URL do seu controlador Spring
-  private apiUrlList = '/category/list'; // URL do seu controlador Spring
+  private apiLocalUrl = environment.PATH_API;
+  private apiUrlSaveCategory = '/categories/category/save'; // URL do seu controlador Spring
+  private apiUrlList = '/categories/category/list'; // URL do seu controlador Spring
   private apiUrlProduct = '/product/list'; // URL do seu controlador Spring
   private apiUrlRemoveProduct = '/product/'; // URL do seu controlador Spring
   private apiUrlAdd = '/product/add'; // URL do seu controlador Spring

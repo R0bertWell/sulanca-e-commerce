@@ -23,7 +23,7 @@
         <label for="imageInput" class="image-label">
           <input type="file" name="file" (change)="setProductImage($event)" id="imageInput">
           <img *ngIf="mainImage" [src]="mainImage.url" alt="Imagem">
-          <img *ngIf="!mainImage" class="secondary-images" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+          <img *ngIf="!mainImage" class="secondary-images" src="assets/images/produto-sem-imagem.png">
         </label>
         <mat-error *ngIf="!mainImage && !selectedImage">Imagem principal obrigatória!</mat-error>
         <div *ngIf="selectedImage != null || mainImage != null" class="delete-icon" (click)="removeMainImage()"><mat-icon>delete_forever</mat-icon></div>

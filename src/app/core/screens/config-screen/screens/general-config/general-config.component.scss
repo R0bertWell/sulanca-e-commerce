@@ -1,0 +1,25 @@
+/* GENERAL CONFIG*/
+
+
+.general-config {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.general-config .general-config__sliders {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.general-config__flux {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.general-config__mercado-pago {
+  display: flex;
+  flex-direction: column;
+}

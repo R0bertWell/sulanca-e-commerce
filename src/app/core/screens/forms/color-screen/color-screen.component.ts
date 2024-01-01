@@ -7,6 +7,7 @@ import { ColorDialogComponent } from './color-dialog/color-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { ColorRequired } from './models/color.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-color-screen',
@@ -16,6 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ColorScreenComponent {
   COLOR_DATA: Color[] = [];
   dataSourceColors: MatTableDataSource<Color> = new MatTableDataSource<Color>(this.COLOR_DATA);
+
+  colorControl: FormControl = new FormControl('');
 
   filter: string = '';
 
@@ -103,8 +106,8 @@ export class ColorScreenComponent {
             this.pageHandlerColor.pageIndex = 0;
             this.getColors();
           },
-          error: (response: any) => {
-            this._snackBar.open(response.error.message, "Ok", {
+          error: (error: any) => {
+            this._snackBar.open(error, "Ok", {
               duration: 10000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom'

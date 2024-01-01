@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../../forms/product-screen/models/category.model';
 import { Color, ProductInfo } from '../../forms/product-screen/models/product-info.model';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Color, ProductInfo } from '../../forms/product-screen/models/product-in
 export class ProductDetailService {
 
   //private apiLocalUrl = "http://localhost:8080"
-  private apiLocalUrl = "http://192.168.1.2:8080"
+  private apiLocalUrl = environment.PATH_API;
   private apiUrlGetColors = '/product-infos/product/'; // URL do seu controlador Spring
   private apiUrlGetSizes = '/product-infos/product/'; // URL do seu controlador Spring
 

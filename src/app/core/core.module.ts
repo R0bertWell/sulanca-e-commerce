@@ -38,10 +38,19 @@ import { SizeScreenComponent } from './screens/forms/size-screen/size-screen.com
 import { SizeDialogComponent } from './screens/forms/size-screen/size-dialog/size-dialog.component';
 import { CategoryScreenComponent } from './screens/forms/category-screen/category-screen.component';
 import { CategoryDialogComponent } from './screens/forms/category-screen/category-dialog/category-dialog.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { RadioColorComponent } from '../shared/radio-color/radio-color.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
+import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
+import { ConfigScreenComponent } from './screens/config-screen/config-screen.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PaymentScreenComponent } from './screens/payment-screen/payment-screen.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { LayoutConfigComponent } from './screens/config-screen/screens/layout-config/layout-config.component';
+import { PaymentConfigComponent } from './screens/config-screen/screens/payment-config/payment-config.component';
+import { GeneralConfigComponent } from './screens/config-screen/screens/general-config/general-config.component';
 
 
 @NgModule({
@@ -57,7 +66,14 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     SizeDialogComponent,
     CategoryScreenComponent,
     CategoryDialogComponent,
-    RadioColorComponent
+    RadioColorComponent,
+    LoginScreenComponent,
+    DashboardScreenComponent,
+    ConfigScreenComponent,
+    PaymentScreenComponent,
+    LayoutConfigComponent,
+    PaymentConfigComponent,
+    GeneralConfigComponent
   ],
   exports: [
     MatIconModule,
@@ -71,7 +87,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatListModule,
     IvyCarouselModule,
     CartScreenComponent,
-    RadioColorComponent
+    RadioColorComponent,
+    MatSlideToggleModule,
+    MatExpansionModule
   ],
   imports: [
     CommonModule,
@@ -103,6 +121,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatRadioModule,
     MatTooltipModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

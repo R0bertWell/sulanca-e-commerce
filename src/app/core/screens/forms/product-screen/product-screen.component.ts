@@ -12,7 +12,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Color, ProductInfo, Size } from './models/product-info.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ProductDetailService } from '../../product-detail-screen/services/product-detail.service';
-import { GlobalVariablesService } from 'src/app/shared/global/global-variables.service';
+import { GlobalVariablesService } from 'src/app/shared/services/global/global-variables.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from './dialogs/product-dialog/product-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
@@ -43,7 +43,6 @@ export class ProductScreenComponent {
   @ViewChild("chipListCategory") chipListCategory: any;
 
   categoryCtrl = new FormControl('');
-  serverSideUrl: string = '';
 
   categoryOptions: Category[] = [];
   selectedCategories: Category[] = [];
@@ -154,11 +153,7 @@ export class ProductScreenComponent {
     private _snackBar: MatSnackBar,
     public globalServ: GlobalVariablesService
     ){
-    globalServ.getServerSideUrl().subscribe({
-      next: (response: string)=> {
-      this.serverSideUrl = response + "/";
-      }
-    });
+
     this.getCategories();
     this.getProducts();
 
@@ -288,7 +283,6 @@ export class ProductScreenComponent {
           console.log("Response GET PRODUCTS=> ", response)
 
           this.PRODUCT_DATA = response.content as Product[];
-          this.PRODUCT_DATA.some((product)=> {product.images.some((image)=> {image.imagePath = this.serverSideUrl + image.imagePath})})
           this.dataSource = new MatTableDataSource<Product>(this.PRODUCT_DATA);
 
           this.pageHandlerProduct.totalSize = response.totalElements;
@@ -311,8 +305,8 @@ export class ProductScreenComponent {
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
           })
-        }, error: (response: any) => {
-          this._snackBar.open(response.error.message, "Ok", {
+        }, error: (error: any) => {
+          this._snackBar.open(error, "Ok", {
             duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
@@ -461,8 +455,8 @@ export class ProductScreenComponent {
         next: (response)=> {
           console.log("Categoria salva com sucesso!")
         },
-        error: (response)=> {
-          console.log("Erro ao salvar a categoria => ", response.error.message)
+        error: (error)=> {
+          console.log(error)
         }
       });
     } else {
@@ -484,8 +478,8 @@ export class ProductScreenComponent {
         next: (response)=> {
           console.log("Tamanho salvo com sucesso!")
         },
-        error: (response)=> {
-          console.log("Erro ao salvar o t amanho => ", response.error.message)
+        error: (error)=> {
+          console.log(error)
         }
       })
     }
@@ -514,8 +508,8 @@ export class ProductScreenComponent {
       next: (response)=> {
         console.log("Cor salvo com sucesso!")
       },
-      error: (response)=> {
-        console.log("Erro ao salvar a cor => ", response.error.message)
+      error: (error)=> {
+        console.log(error)
       }
     })
 

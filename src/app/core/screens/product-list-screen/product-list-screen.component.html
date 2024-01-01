@@ -29,18 +29,17 @@
 [pageIndex]="pageHandlerProduct.pageIndex"
 aria-label="Select page of products"
 ></mat-paginator>-->
-<input type="file" (change)="uploadImage($event)">
 
 <div *ngIf="PRODUCTS_TAGGEDS.length > 0" class="products-tag-section">
   <div *ngFor="let product_tagged of PRODUCTS_TAGGEDS" class="product-tag-container">
     <div class="head">
       <h2 class="subtitle">{{product_tagged.category.categoryName}}</h2>
     </div>
-    <carousel [height]="carousel_height" [margin]="12" style="margin-bottom: 100px;" [arrowsTheme]="'dark'" [counter]="true" [cellWidth]="carousel_cell_width" >
+    <carousel [height]="carousel_height" [margin]="12" style="margin-bottom: 100px;" [dots]="true" [arrowsTheme]="'dark'" [transitionDuration]="500" [cellWidth]="carousel_cell_width" >
       <div *ngFor="let product of product_tagged.products" (click)="goToProductDetails(product)" class="carousel-cell">
         <div class="image-content" [ngStyle]="{'width': carousel_cell_width + 'px', height: carousel_cell_width + 'px'}" >
-          <img class="image-carousel" *ngIf="product.images.length > 0" [src]="product.images[0].imagePath">
-          <img *ngIf="product.images.length == 0" class="image-carousel" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+          <img class="image-carousel" *ngIf="product.images.length > 0" src="{{product.images[0].imagePath}}">
+          <img *ngIf="product.images.length == 0" class="image-carousel" src="assets/images/produto-sem-imagem.png">
         </div>
         <div class="product-content">
           <h3>{{product.productName}}</h3>

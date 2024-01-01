@@ -1,0 +1,65 @@
+<div class="general-config">
+  <div class="general-config__sliders">
+    <div class="general-config__flux-order">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Fluxo dos pedidos</mat-card-title>
+            <mat-card-subtitle>Whatsapp / Meios de pagamento (MercadoPago)</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group [formControl]="configOrderFluxControl" >
+            <mat-radio-button *ngFor="let data of radioFluxData" [value]="data.value">{{data.desc}}</mat-radio-button>
+          </mat-radio-group>
+          <div class="general-config__flux">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title-group>
+                  <mat-card-title>Whatsapp</mat-card-title>
+                  <mat-card-subtitle>Configurações</mat-card-subtitle>
+                </mat-card-title-group>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="general-config__whatsapp">
+                  <mat-form-field>
+                    <mat-label>Número Whatsapp (i)</mat-label>
+                    <input matInput type="text" [formControl]="whatsappNumberControl" #whatsNumberInput>
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title-group>
+                  <mat-card-title>MercadoPago</mat-card-title>
+                  <mat-card-subtitle>Configurações</mat-card-subtitle>
+                </mat-card-title-group>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="general-config__mercado-pago">
+                  <label>Colocar aqui o dialog pra configurar as informações do banco!</label>
+                  <mat-form-field>
+                    <mat-label>Api token</mat-label>
+                    <input matInput [formControl]="apiTokenControl" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Idempotency key</mat-label>
+                    <input matInput [formControl]="idempotencyControl" [type]="hideIdemKey ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hideIdemKey = !hideIdemKey" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideIdemKey">
+                      <mat-icon>{{hideIdemKey ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

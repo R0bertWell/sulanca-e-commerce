@@ -7,6 +7,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 import { SizeService } from './services/size.service';
 import { SizeRequired } from './models/size.model';
 import { SizeDialogComponent } from './size-dialog/size-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-size-screen',
@@ -16,6 +17,8 @@ import { SizeDialogComponent } from './size-dialog/size-dialog.component';
 export class SizeScreenComponent {
   SIZE_DATA: Size[] = [];
   dataSourceSizes: MatTableDataSource<Size> = new MatTableDataSource<Size>(this.SIZE_DATA);
+
+  sizeControl: FormControl = new FormControl('');
 
   filter: string = '';
 
@@ -103,8 +106,8 @@ export class SizeScreenComponent {
             this.pageHandlerSize.pageIndex = 0;
             this.getSizes();
           },
-          error: (response: any) => {
-            this._snackBar.open(response.error.message, "Ok", {
+          error: (error: any) => {
+            this._snackBar.open(error, "Ok", {
               duration: 10000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom'

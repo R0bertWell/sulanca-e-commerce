@@ -6,10 +6,11 @@ import { Product } from '../forms/product-screen/models/product.model';
 import { CartService } from 'src/app/shared/cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { GlobalVariablesService } from 'src/app/shared/global/global-variables.service';
+import { GlobalVariablesService } from 'src/app/shared/services/global/global-variables.service';
 import { FormControl } from '@angular/forms';
 import { ProductListService } from './services/product-list.service';
 import { ProductTag } from './models/product-tag.model';
+import { RequiredCart } from '../cart-screen/models/client-order.model';
 
 export interface Image{
   path: ''
@@ -23,7 +24,6 @@ export interface Image{
 export class ProductListScreenComponent {
   colorPicker: number = 1;
   radioControl: FormControl = new FormControl(1);
-  serverSideUrl = '';
 
   PRODUCT_DATA: Product[] = [];
   CATEGORY_DATA: Category[] = [];
@@ -59,20 +59,24 @@ export class ProductListScreenComponent {
               private activeRoute: ActivatedRoute,
               public globalServ: GlobalVariablesService
               ){
-                console.log("Cat => ", this.router.getCurrentNavigation()?.extras.state?.['categoryControl'])
+
+    this.productListService.getCarts().subscribe({
+      next: (response: RequiredCart[]) => {
+        console.log("Cart => ", response)
+      },
+      error: (error: string) => {
+        console.log("EROR = >", error)
+      }
+    })
+    console.log("Cat => ", this.router.getCurrentNavigation()?.extras.state?.['categoryControl'])
     this.categoryControl.setValue(-1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if(this.router.getCurrentNavigation()?.extras.state?.['categoryControl']){
       this.categoryControl = this.router.getCurrentNavigation()?.extras.state?.['categoryControl'];
       console.log("Cat => ", this.categoryControl)
     }
 
-    globalServ.getServerSideUrl().subscribe({
-      next: (response: string)=> {
-        this.serverSideUrl = response + "/";
-      }
-    });
-    console.log("Server side url => ", this.serverSideUrl)
-                console.log("cART SERVICE=> ", this.cartService)
     this.getCategories();
     this.getProducts();
     this.getProductsByCategory();
@@ -97,12 +101,6 @@ export class ProductListScreenComponent {
           console.log("Response GET PRODUCTS=> ", response)
 
           this.PRODUCT_DATA = response.content as Product[];
-          for(let product of this.PRODUCT_DATA){
-            for(let images of product.images){
-              images.imagePath = this.serverSideUrl + images.imagePath;
-              this.images.push({path: images.imagePath} as Image)
-            }
-          }
 
           this.pageHandlerProduct.totalSize = response.totalElements;
           this.pageHandlerProduct.pageIndex = response.pageable.pageNumber;
@@ -121,13 +119,6 @@ export class ProductListScreenComponent {
       next: (response: ProductTag[]) => {
         console.log("Product tags => ", response)
         let PRODUCT_TAGS: ProductTag[] = response as ProductTag[];
-        for(let category of PRODUCT_TAGS){
-          for(let product of category.products){
-            for(let image of product.images){
-              image.imagePath = this.serverSideUrl + image.imagePath;
-            }
-          }
-        }
         this.PRODUCTS_TAGGEDS = PRODUCT_TAGS;
         console.log("Products tagged=> ", this.PRODUCTS_TAGGEDS)
 
@@ -174,20 +165,13 @@ export class ProductListScreenComponent {
   }
 
   handlePage(event: any): void {
-    console.log("Handle page => ", event)
-    console.log("Before Page handler => ", this.pageHandlerProduct)
     this.pageHandlerProduct.pageIndex = event.pageIndex;
     this.pageHandlerProduct.pageSize = event.pageSize;
-    console.log("Page handler => ", this.pageHandlerProduct)
     this.getProducts();
   }
 
   calculateCarouselDimensions() {
     const windowWidth = window.innerWidth;
-    const windowHeigth = window.innerHeight;
-
-    // Defina lógica para calcular o novo height e cellWidth com base no tamanho da tela.
-    // Por exemplo, você pode ter lógica diferente para dispositivos móveis e computadores.
 
     let newHeight;
     let newCellWidth;
@@ -205,34 +189,24 @@ export class ProductListScreenComponent {
     else {
       newCellWidth = windowWidth / 5.5;
       newHeight = newCellWidth + 100;
-      // Lógica de exemplo para computadores
     }
-    //newHeight = windowWidth / 4;
-    //newCellWidth = newHeight;
-    //}
 
     return { newHeight, newCellWidth };
   }
 
   updateCarouselDimensions() {
     const { newHeight, newCellWidth } = this.calculateCarouselDimensions();
-    console.log("New height width => ", newHeight , " / " , newCellWidth)
     this.carousel_height = newHeight;
     this.carousel_cell_width = newCellWidth;
-    console.log("Carousle height => ", this.carousel_height)
-    // Use o Renderer2 para atualizar as propriedades do carousel
-    //this.renderer.setStyle(this.el.nativeElement.querySelector('carousel'), 'height', `${newHeight}px`);
-    //this.renderer.setStyle(this.el.nativeElement.querySelector('carousel'), 'width', `${newCellWidth}px`);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    console.log("Resizing => ", event)
     this.updateCarouselDimensions();
   }
 
   uploadImage(event: any){
-    const file = document.getElementById("file");
+    /*const file = document.getElementById("file");
     const img = document.getElementById("img");
     const url = document.getElementById("url");
     const formData = new FormData();
@@ -240,9 +214,38 @@ export class ProductListScreenComponent {
 
     const headers = new HttpHeaders({
       Authorization: "Client-ID 1f83eb04ba3b8c7"
+    });*/
+    const file = document.getElementById("file");
+    const img = document.getElementById("img");
+    const url = document.getElementById("url");
+    const formData = new FormData();
+    //formData.append("image", event.target.files[0]);
+    formData.append("title", "Meu album teste");
+    formData.append("description", "Descrição do meu album teste");
+
+    const headers = new HttpHeaders({
+      Authorization: "Client-ID 1f83eb04ba3b8c7"
     });
 
-    this.http.post("https://api.imgur.com/3/image/", formData, { headers}).subscribe({
+    /**
+    --header 'Authorization: Bearer {{accessToken}}' \
+    --form 'ids[]="{{imageHash}}"' \
+    --form 'title="My dank meme album"' \
+    --form 'description="This albums contains a lot of dank memes. Be prepared."' \
+    --form 'cover="{{imageHash}}"'
+     */
+
+    this.http.post("https://api.imgur.com/3/album", formData, { headers }).subscribe({
+      next: (response: any) => {
+        console.log("Album criado => ", response)
+      },
+      error: (response: any) => {
+        console.log("Respone error => ", response)
+
+      }
+    })
+
+    /*this.http.post("https://api.imgur.com/3/image/", formData, { headers}).subscribe({
       next: (response: any) => {
         console.log("Respone => ", response)
       },
@@ -251,7 +254,7 @@ export class ProductListScreenComponent {
 
       }
     })
-
+*/
   }
 
 }

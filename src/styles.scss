@@ -3,6 +3,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 body { font-family: Roboto, "Helvetica Neue", sans-serif; overflow-x: hidden;}
 
@@ -61,4 +62,8 @@ button:hover {
 
 .carousel-dots .carousel-dot-active{
   background-color: #e5a733 !important;
+}
+
+#cart-sidenav .mat-drawer-inner-container {
+  overflow: hidden !important;
 }

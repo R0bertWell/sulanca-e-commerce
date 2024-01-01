@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product, ProductRequired } from '../forms/product-screen/models/product.model';
 import { FormControl, Validators } from '@angular/forms';
@@ -8,7 +8,6 @@ import { CartService } from 'src/app/shared/cart/cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageViewerComponent } from 'src/app/shared/image-viewer/image-viewer.component';
 import { ColorRequired } from '../forms/color-screen/models/color.model';
-import { ThemePalette } from '@angular/material/core';
 import { SizeRequired } from '../forms/size-screen/models/size.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -58,13 +57,15 @@ export class ProductDetailScreenComponent {
   }
 
   ngOnInit(): void {
-    this.colorControl.valueChanges.subscribe( (color: Color) => {
+    this.colorControl.valueChanges.subscribe( (color: ColorRequired) => {
       console.log("Color => ", color)
-      this.color = color;
-      this.sizeControl.setValue('', {emitEvent: false});
-      if(this.color && this.color.colorId){
-        this.colorId = this.color.colorId;
-        this.getSizesOfProductByColor();
+      if(color){
+        this.color = color;
+        this.sizeControl.setValue('', {emitEvent: false});
+        if(this.color && this.color.colorId){
+          this.colorId = this.color.colorId;
+          this.getSizesOfProductByColor();
+        }
       }
     });
 
@@ -98,8 +99,8 @@ export class ProductDetailScreenComponent {
     this.sizes = [];
     this.quantities = [];
     this.productDetailService.getSizesOfProductByColor(this.productId, this.colorId).subscribe({
-      next: (response: Size[])=> {
-        this.sizes = response as Size[];
+      next: (response: SizeRequired[])=> {
+        this.sizes = response as SizeRequired[];
         console.log("Response => ", response)
       }, error: (response)=> {
         console.log("Response ERRO => ", response)

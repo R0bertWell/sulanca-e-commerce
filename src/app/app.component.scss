@@ -2,11 +2,18 @@
   width: 100%;
 
   //backdrop-filter: blur(4px);
-  transition: top 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+#sidenav__content {
+  padding-top: 120px;
+  height: 100%;
 }
 
 .fixed-header {
   position: fixed;
+  top: 0;
+  z-index: 1000000;
 }
 
 .floating-header {
@@ -16,14 +23,20 @@
   padding: 3px;
 }
 
-// adicionei
-.navbar{
- background-color: black;
+
+.opacity-header{
+  opacity: 1;
 }
+
+.no-opacity-header{
+  opacity: 0;
+}
+
 
 #content-section {
   width: 100%;
-  height: calc(100% - 80px); /* Calcula a altura restante da tela para o conteúdo */
+  //height: calc(100% - 90px); /* Calcula a altura restante da tela para o conteúdo */
+  height: 100%;
 }
 
 .sidenav-container {
@@ -57,7 +70,7 @@
   height: 700px;
   background-color: #000000;
   color: white;
-  margin-top: 150px;
+  padding-top: 150px;
 }
 
 #footer-section .footer-logo{
@@ -109,6 +122,9 @@ hr {
 
 #cart-sidenav{
   width: 600px;
+  height: 100vh;
+  position: fixed;
+  overflow-y: hidden;
 }
 
 @media only screen and (max-width: 900px) {

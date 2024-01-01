@@ -33,7 +33,6 @@ export class ProductDialogComponent {
   @ViewChild("chipGridCategory") chipGridCategory: any;
 
   categoryCtrl = new FormControl('');
-  serverSideUrl: string = '';
 
   categoryOptions: Category[] = [];
   selectedCategories: Category[] = [];
@@ -215,8 +214,8 @@ export class ProductDialogComponent {
             console.log("PRODUTO NAO FOI SALVO COM SUCESSO!");
           }
         },
-        error: (response) => {
-          this._snackBar.open("Error : " + response.error.message, "Ok", {
+        error: (error) => {
+          this._snackBar.open(error, "Ok", {
             duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
@@ -289,8 +288,8 @@ export class ProductDialogComponent {
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
           })
-        }, error: (response) => {
-          this._snackBar.open("Error : " + response.error.message, "Ok", {
+        }, error: (error) => {
+          this._snackBar.open(error, "Ok", {
             duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom'
@@ -391,11 +390,9 @@ export class ProductDialogComponent {
         imageOrder.push(true)
       }
 
-      let i = 0;
       for(let image of this.secondaryImages){
         if(image.file){
           formData.append('file', image.file);
-          i++;
           imageOrder.push(false)
         }
       }

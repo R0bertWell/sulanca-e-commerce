@@ -1,14 +1,22 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" mode="over">
-    <button (click)="sidenav.close()" style="float: right;">Voltar</button>
+
+  <!-- MENU SIDENAV -->
+  <mat-sidenav #menu__sidenav class="sidenav" mode="over">
+    <button (click)="menu__sidenav.close()" style="float: right;">Voltar</button>
     <mat-nav-list>
       <mat-list-item (click)="navigateToRoute('/product-list')">
         <a matLine>Produtos</a>
       </mat-list-item>
-      <mat-list-item (click)="navigateToRoute('/cart')">
-        <a matLine>Carrinho</a>
+      <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/colors')">
+        <a matLine>Cores</a>
       </mat-list-item>
-      <mat-list-item (click)="navigateToRoute('/add-product')">
+      <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/sizes')">
+        <a matLine>Tamanhos</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/categories')">
+        <a matLine>Categorias</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/add-product')">
         <a matLine>Adicionar Produto</a>
       </mat-list-item>
 
@@ -28,55 +36,45 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav #cart_sidenav id="cart-sidenav" class="sidenav" mode="over" position="end" fxHide.gt-sm>
-    <button (click)="cart_sidenav.close()">Voltar</button>
-
-    Carrinho
-    <app-cart-screen></app-cart-screen>
+  <!-- CART SIDENAV -->
+  <mat-sidenav #cart__sidenav id="cart-sidenav" class="sidenav" mode="over" position="end" fxHide.gt-sm>
+    <app-cart-screen *ngIf="cart__sidenav.opened" [sidenav]="cart__sidenav"></app-cart-screen>
   </mat-sidenav>
-
-  <!--  <mat-sidenav-content [style.backgroundImage]="backgroundStyle">
--->
-  <mat-sidenav-content style="background-color: white;">
-    <div style="width: 100%; height: 90px;" *ngIf="isHeaderFloating">
-
-    </div>
-    <header id="header-nav-bar" [ngClass]="{'floating-header': isHeaderFloating}">
-      <nav class="navbar navbar-expand-sm py-3 border-bottom navbar-light">
+  <mat-sidenav-content id="sidenav__content" [style.backgroundColor]="content_bgColor" [style.backgroundImage]="content_bgImg">
+<!--<mat-sidenav-content id="sidenav__content" [style.backgroundColor]="content_bgColor" [style.backgroundImage]="content_bgImg">-->
+    <header id="header-nav-bar" class="fixed-header" [ngClass]="{'opacity-header': !isScrolledDown, 'no-opacity-header': isScrolledDown}">
+      <nav class="navbar" [style.backgroundColor]="nav_bar_bgColor">
         <div class="container">
-          <button *ngIf="isSmallScreen" type="button" style="background-color: black; color: #e5a733" mat-button (click)="sidenav.toggle()">
+          <button *ngIf="isSmallScreen" type="button" style="background-color: black; color: #e5a733" mat-button (click)="menu__sidenav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
           <div style="display: flex; justify-content: center; align-items: center; z-index: 1;">
             <a href="" class="navbar-brand">
-              <img src="assets/images/dkumlook-logo.jpg" alt="Logo" class="logo-img">
+              <img [src]="your_logo" alt="Logo" class="logo-img">
             </a>
           </div>
           <div [ngClass]="{'normal-screen': !isSmallScreen, 'hidden-screen': isSmallScreen}">
             <mat-nav-list class="matnavlist">
-              <mat-list-item (click)="navigateToRoute('/product-list')">
-                <a matLine>Produtos</a>
-              </mat-list-item>
-              <mat-list-item (click)="navigateToRoute('/cart')">
-                <a matLine>Carrinho</a>
-              </mat-list-item>
-              <mat-list-item (click)="navigateToRoute('/colors')">
+              <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/colors')">
                 <a matLine>Cores</a>
               </mat-list-item>
-              <mat-list-item (click)="navigateToRoute('/sizes')">
+              <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/sizes')">
                 <a matLine>Tamanhos</a>
               </mat-list-item>
-              <mat-list-item (click)="navigateToRoute('/categories')">
+              <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/categories')">
                 <a matLine>Categorias</a>
               </mat-list-item>
-              <mat-list-item (click)="navigateToRoute('/add-product')">
+              <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/add-product')">
                 <a matLine>Adicionar Produto</a>
+              </mat-list-item>
+              <mat-list-item (click)="navigateToRoute('/payment')">
+                <a matLine>Pagamento</a>
               </mat-list-item>
             </mat-nav-list>
           </div>
-          <div>
-            <!--<button class="cart-button" (click)="navigateToRoute('/cart')">-->
-            <button class="cart-button" (click)="cart_sidenav.toggle()">
+          <div class="header__right-buttons">
+            <button mat-button (click)="login()"><mat-icon>person</mat-icon></button>
+            <button class="cart-button" (click)="cart__sidenav.toggle()">
               <mat-icon>shopping_cart</mat-icon>
             </button>
           </div>
@@ -86,10 +84,10 @@
     <content id="content-section">
       <router-outlet></router-outlet>
     </content>
-    <footer id="footer-section">
+    <footer id="footer-section" *ngIf="showFooter()" [style.backgroundColor]="footer_bgColor">
       <div class="footer-logo">
         <a href="" class="navbar-brand" aria-label="Início da Loja">
-          <img src="assets/images/dkumlook-logo.jpg" alt="Logo" class="footer-brand">
+          <img [src]="your_logo" alt="Logo" class="footer-brand">
         </a>
       </div>
       <div class="footer-menus">
@@ -98,6 +96,5 @@
         </div>
       </div>
     </footer>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

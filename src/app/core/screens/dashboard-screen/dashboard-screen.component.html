@@ -1,0 +1,41 @@
+<mat-tab-group (selectedIndexChange)="changeTab($event)">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings_applications</mat-icon>
+      Configurações
+    </ng-template>
+    <app-config-screen *ngIf="current_screen == 'config'"></app-config-screen>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>shopping_basket</mat-icon>
+      Produtos
+    </ng-template>
+    <app-product-screen *ngIf="current_screen == 'product'"></app-product-screen>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>category</mat-icon>
+      Categorias
+    </ng-template>
+    <app-category-screen *ngIf="current_screen == 'category'"></app-category-screen>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>color_lens</mat-icon>
+      Cores
+    </ng-template>
+    <app-color-screen *ngIf="current_screen == 'color'"></app-color-screen>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>straighten</mat-icon>
+      Tamanhos
+    </ng-template>
+    <app-size-screen *ngIf="current_screen == 'size'"></app-size-screen>
+  </mat-tab>
+</mat-tab-group>

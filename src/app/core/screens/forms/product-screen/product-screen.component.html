@@ -1,15 +1,24 @@
 <mat-tab-group>
   <mat-tab label="Lista de Produtos">
-    <div class="search-fields">
-      <mat-form-field>
-        <mat-label>Descrição do Produto</mat-label>
-        <input matInput [formControl]="searchProductControl" #input>
-      </mat-form-field>
+    <div class="menu__form-screens">
+      <label class="menu__form-screens__label">
+        <h2>Produtos</h2>
+      </label>
 
-      <mat-checkbox [formControl]="seachInStockControl" color="primary">Em estoque?</mat-checkbox>
+      <div class="menu__form-screens__forms">
+        <mat-slide-toggle [formControl]="seachInStockControl" [labelPosition]="'before'" >Em estoque?</mat-slide-toggle>
 
-      <button (click)="openNewProductDialog()">Novo Produto</button>
+        <mat-form-field class="menu__form-screens__forms-fields">
+          <mat-label>Nome do produto</mat-label>
+          <input matInput type="string" [formControl]="searchProductControl" #input>
+        </mat-form-field>
+
+        <mat-checkbox [formControl]="seachInStockControl" color="primary" #inStockInput>Em estoque?</mat-checkbox>
+
+        <button (click)="openNewProductDialog()"><mat-icon>add_circle_outline</mat-icon></button>
+      </div>
     </div>
+
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
       <ng-container matColumnDef="productId">
         <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -41,14 +50,14 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Editar </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button (click)="editProduct(element)">Editar</button>
+          <button mat-button (click)="editProduct(element)"><mat-icon>edit</mat-icon></button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="remove">
         <th mat-header-cell *matHeaderCellDef> Remover </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button (click)="removeProduct(element)">Remover</button>
+          <button mat-button (click)="removeProduct(element)"><mat-icon>delete_outline</mat-icon></button>
         </td>
       </ng-container>
 
@@ -181,7 +190,7 @@
               <label for="imageInput" class="image-label">
                 <input type="file" name="secondaryImage" (change)="setSecondaryImage($event, image, index)">
                 <img *ngIf="image.url" class="secondary-images" [src]="image.url" alt="Escolha uma foto">
-                <img *ngIf="!image.url" class="secondary-images" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+                <img *ngIf="!image.url" class="secondary-images" src="assets/images/produto-sem-imagem.png">
               </label>
               <div *ngIf="image.url" class="delete-icon" (click)="removeSecondaryImage(image)">X</div>
             </div>
@@ -190,7 +199,7 @@
             <label for="imageInput" class="image-label">
               <input type="file" name="file" (change)="setProductImage($event)" id="imageInput">
               <img *ngIf="imagePreview" [src]="imagePreview" alt="Imagem">
-              <img *ngIf="!imagePreview" class="secondary-images" src="https://loja.thunderx3.com.br/modules/web/view/img/produto-sem-imagem.png">
+              <img *ngIf="!imagePreview" class="secondary-images" src="assets/images/produto-sem-imagem.png">
             </label>
             <div *ngIf="selectedImage != null" class="delete-icon" (click)="removeMainImage()">X</div>
           </div>

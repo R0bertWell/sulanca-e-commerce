@@ -1,0 +1,74 @@
+<div class="ticket">
+  <div class="andes-card andes-card--outline andes-card--padding-16">
+    <header class="ticket__header">
+      <div class="ticket__initials-seller"><span>WR</span>
+      </div>
+      <div class="ticket__brand-name">
+        <span class="ticket__medium-text--bold">Wellington Roberton</span>
+      </div>
+    </header>
+    <hr class="ticket__line">
+    <section class="ticket__section">
+      <div class="ticket__title">
+        <div>
+          <span class="ticket__extralarge-text">Pague R$&nbsp; {{transactionAmount}} via Pix</span>
+        </div>
+        <div class="ticket__title-subtitle">
+          <span class="ticket__medium-text--lighter">Vencimento: {{dateOfexpiration | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+      <div class="ticket__code-instruction">
+        <div class="ticket__code"><div>
+          <span class="ticket__medium-text--bold">Para pagar, escolha uma destas opções:</span>
+        </div>
+        <div class="ticket__code-section">
+          <div class="ticket__code">
+            <div class="ticket__qrcode-section">
+              <span class="ticket__small-text">Código QR</span>
+              <div class="ticket__qrcode-image">
+                <img alt="QRCode" class="ticket__qrcode-canva--desktop" [src]="qrCodeUrl">
+              </div>
+            </div>
+          </div>
+          <div class="ticket__code">
+            <div class="ticket__plaincode">
+              <span class="ticket__small-text">Código de pagamento</span>
+              <div class="ticket__plaincode-value">
+                <span class="ticket__extralarge-text--lighter">{{qrCode}}</span>
+                <svg #copyIcon class="copy-value" (click)="onCopyIconClick()" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6001 0.2052H5.01367V2.58682H6.21367V1.4052H13.4001V11.0034H12.7889V12.2034H14.6001V0.2052ZM11.612 3.79999H1.99158V15.8001H11.612V3.79999ZM3.19158 14.6001V4.99999H10.412V14.6001H3.19158Z" fill="#009EE3" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #2dbfff;"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ticket__instruction-title">Como pagar?</div>
+      <div class="ticket__instruction">
+        <div class="ticket__instruction--step">
+          <div class="ticket__circle-count"><span>1</span></div>
+          <div class="ticket__instruction--step-text">
+            <span class="ticket__small-text">Entre no app ou site do seu banco e escolha a opção de pagamento via Pix.</span>
+          </div>
+        </div>
+      </div>
+      <div class="ticket__instruction">
+        <div class="ticket__instruction--step">
+          <div class="ticket__circle-count"><span>2</span></div>
+          <div class="ticket__instruction--step-text">
+            <span class="ticket__small-text">Escaneie o código QR ou copie e cole o código de pagamento.</span>
+          </div>
+        </div>
+      </div>
+      <div class="ticket__instruction">
+        <div class="ticket__instruction--step">
+          <div class="ticket__circle-count"><span>3</span></div>
+          <div class="ticket__instruction--step-text">
+            <span class="ticket__small-text">Pronto! O pagamento será creditado na hora e você receberá um e-mail de confirmação.</span>
+          </div>
+        </div>
+      </div>
+      <p class="ticket__instruction-details">O Pix tem um limite diário de transferências. Para mais informações, por favor, consulte seu banco.</p></div>
+    </section>
+  </div>
+</div>

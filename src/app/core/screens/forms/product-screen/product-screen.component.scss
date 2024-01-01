@@ -409,3 +409,27 @@ tr.example-element-row:not(.example-expanded-row):active {
   height: 100%;
 
 }
+
+// MENU SEARCH
+
+.menu__form-screens {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu__form-screens__label {
+  padding: 10px 0;
+}
+
+.menu__form-screens__forms {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.menu__form-screens__forms-fields {
+  padding: 0px 10px;
+}

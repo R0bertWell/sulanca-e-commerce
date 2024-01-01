@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 import { CategoryService } from './services/category.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { CategoryRequired } from './models/category.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-category-screen',
@@ -16,6 +17,8 @@ import { CategoryRequired } from './models/category.model';
 export class CategoryScreenComponent {
   SIZE_DATA: Category[] = [];
   dataSourceCategories: MatTableDataSource<Category> = new MatTableDataSource<Category>(this.SIZE_DATA);
+
+  categoryControl: FormControl = new FormControl('');
 
   filter: string = '';
 
@@ -103,8 +106,8 @@ export class CategoryScreenComponent {
             this.pageHandlerCategory.pageIndex = 0;
             this.getCategories();
           },
-          error: (response: any) => {
-            this._snackBar.open(response.error.message, "Ok", {
+          error: (error: any) => {
+            this._snackBar.open(error, "Ok", {
               duration: 10000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom'

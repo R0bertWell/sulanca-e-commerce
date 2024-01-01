@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Size } from '../models/size.model';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SizeService {
-  private apiLocalUrl = "http://192.168.1.2:8080";
+  private apiLocalUrl = environment.PATH_API;
   private apiUrlAddSize = '/sizes/size/save';
 
 

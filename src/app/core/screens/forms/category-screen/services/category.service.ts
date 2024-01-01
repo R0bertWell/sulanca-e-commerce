@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiLocalUrl = "http://192.168.1.2:8080";
+  private apiLocalUrl = environment.PATH_API;
   private apiUrlAddSize = '/categories/category/save';
 
 

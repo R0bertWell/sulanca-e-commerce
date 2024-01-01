@@ -1,3 +1,18 @@
+<div class="menu__form-screens">
+  <label class="menu__form-screens__label">
+    <h2>Tamanho dos produtos</h2>
+  </label>
+
+  <div class="menu__form-screens__forms">
+    <mat-form-field class="menu__form-screens__forms-fields">
+      <mat-label>Nome do tamanho</mat-label>
+      <input matInput type="string" [formControl]="sizeControl" #sizeInput>
+    </mat-form-field>
+
+    <button mat-button (click)="chamadaDialog()"><mat-icon>add_circle_outline</mat-icon></button>
+  </div>
+</div>
+
 <table mat-table matSort [dataSource]="dataSourceSizes" class="mat-elevation-z8">
   <ng-container matColumnDef="size">
     <th mat-header-cell *matHeaderCellDef> Tamanho </th>
