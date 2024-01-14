@@ -6,6 +6,9 @@ export class Cart {
   orderDate!: Date;
   totalValue!: number;
   payed!: boolean;
+  payedDate?: Date;
+  sent!: boolean;
+  sentDate?: Date;
   items: ProductInfo[] = [];
 }
 

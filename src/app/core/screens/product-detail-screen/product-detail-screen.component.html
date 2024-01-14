@@ -47,6 +47,7 @@
           <mat-button-toggle-group id="size-button-group" [(ngModel)]="size" name="sizes" [formControl]="sizeControl">
             <mat-button-toggle class="size-buttons" *ngFor="let size of sizes" [value]="size">{{size.sizeName}}</mat-button-toggle>
           </mat-button-toggle-group>
+          <div *ngIf="!color">Selecione uma cor</div>
         </div>
         <div class="quantity-wrapper">
           <div class="quantity-modal">

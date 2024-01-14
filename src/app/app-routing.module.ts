@@ -12,6 +12,7 @@ import { authGuard } from './auth/auth.guard';
 import { DashboardScreenComponent } from './core/screens/dashboard-screen/dashboard-screen.component';
 import { ConfigScreenComponent } from './core/screens/config-screen/config-screen.component';
 import { PaymentScreenComponent } from './core/screens/payment-screen/payment-screen.component';
+import { OrderScreenComponent } from './core/screens/order-screen/order-screen.component';
 
 const routes: Routes = [
   { path: 'product-list', component: ProductListScreenComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'add-product', component: ProductScreenComponent, canActivate: [authGuard] },
   { path: 'dashboard', component: DashboardScreenComponent, canActivate: [authGuard] },
   { path: 'config', component: ConfigScreenComponent, canActivate: [authGuard] },
+  { path: 'orders', component: OrderScreenComponent },
   { path: 'payment', component: PaymentScreenComponent},
   { path: 'login', component: LoginScreenComponent },
 

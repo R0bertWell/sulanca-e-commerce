@@ -51,6 +51,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LayoutConfigComponent } from './screens/config-screen/screens/layout-config/layout-config.component';
 import { PaymentConfigComponent } from './screens/config-screen/screens/payment-config/payment-config.component';
 import { GeneralConfigComponent } from './screens/config-screen/screens/general-config/general-config.component';
+import { OrderScreenComponent } from './screens/order-screen/order-screen.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { GeneralConfigComponent } from './screens/config-screen/screens/general-
     PaymentScreenComponent,
     LayoutConfigComponent,
     PaymentConfigComponent,
-    GeneralConfigComponent
+    GeneralConfigComponent,
+    OrderScreenComponent
   ],
   exports: [
     MatIconModule,

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from 'src/enviroments/environment.prod';
+import { environment } from 'src/enviroments/environment';
 import { User } from '../../models/user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +27,8 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-      return this.http.post<any>(`http://192.168.1.2:8080/authentication`, { username, password })
+      console.log(`Login => ${environment.PATH_API}/authentication` )
+      return this.http.post<any>(`http://192.168.1.23:8080/authentication`, { username, password })
         .pipe(map(user => {
           console.log("Passou do login => ", user)
             // store user details and jwt token in local storage to keep user logged in between page refreshes

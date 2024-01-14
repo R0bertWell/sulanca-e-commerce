@@ -117,6 +117,7 @@ export class CartScreenComponent {
               orderDate: new Date(),
               totalValue: this.totalValue,
               payed: false,
+              sent: false,
               items: this.PRODUCT_INFO_DATA
             }
 

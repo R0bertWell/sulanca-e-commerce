@@ -113,9 +113,14 @@ export class ProductDetailScreenComponent {
     this.productDetailService.getProductQuantByColorSize(this.productId, this.colorId, this.sizeId).subscribe({
       next: (response: number)=> {
         this.maxQuantity = response;
+
         let quantities: number = response as number;
         for(let i = 1; i < quantities + 1; i++){
           this.quantities.push(i);
+        }
+
+        if(this.quantity > this.maxQuantity){
+          this.quantityControl.setValue(this.maxQuantity);
         }
         console.log("Response => ", response)
       }, error: (response)=> {
@@ -202,8 +207,17 @@ export class ProductDetailScreenComponent {
   }
 
   increment() {
-    if(this.quantity < this.maxQuantity)
-      this.quantity++;
+    if(this.color && this.size){
+      if(this.quantity < this.maxQuantity){
+        this.quantity++;
+      } else {
+        this._snackBar.open(`Quantidade máxima do produto atingida.`, "Ok", {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom'
+        })
+      }
+    }
   }
 
   decrement() {

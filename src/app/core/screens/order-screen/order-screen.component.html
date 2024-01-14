@@ -1,0 +1,64 @@
+<div class="menu__form-screens">
+  <label class="menu__form-screens__label">
+    <h2>Pedidos</h2>
+  </label>
+
+</div>
+
+
+<table mat-table matSort [dataSource]="dataSourceCarts" class="mat-elevation-z8">
+  <ng-container matColumnDef="cartId">
+    <th mat-header-cell *matHeaderCellDef> Número do Pedido </th>
+    <td mat-cell *matCellDef="let element"> {{element.cartId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="excursion">
+    <th mat-header-cell *matHeaderCellDef> Excursão </th>
+    <td mat-cell *matCellDef="let element"> {{element.excursion}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderDate">
+    <th mat-header-cell *matHeaderCellDef> Data do pedido </th>
+    <td mat-cell *matCellDef="let element"> {{element.orderDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="payed">
+    <th mat-header-cell *matHeaderCellDef> Pago? </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox (change)="setPayedOrder(element)" [(ngModel)]="element.payed" [checked]="element.payed" [value]="element.payed"></mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payedDate">
+    <th mat-header-cell *matHeaderCellDef> Data de pagamento </th>
+    <td mat-cell *matCellDef="let element"> {{element.payedDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sent">
+    <th mat-header-cell *matHeaderCellDef> Enviado? </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox (change)="setSentOrder(element)" [(ngModel)]="element.sent" [checked]="element.sent" [value]="element.sent"></mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sentDate">
+    <th mat-header-cell *matHeaderCellDef> Data de envio </th>
+    <td mat-cell *matCellDef="let element"> {{element.sentDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalValue">
+    <th mat-header-cell *matHeaderCellDef> Valor total </th>
+    <td mat-cell *matCellDef="let element"> {{element.totalValue}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedCartColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedCartColumns;"></tr>
+</table>
+<mat-paginator
+  [showFirstLastButtons]="true"
+  (page)="handlePageCart($event)"
+  [pageSize]="pageHandlerCart.pageSize"
+  [length]="pageHandlerCart.totalSize"
+  [pageIndex]="pageHandlerCart.pageIndex"
+  aria-label="Select page of orders"
+></mat-paginator>

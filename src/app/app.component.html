@@ -16,9 +16,6 @@
       <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/categories')">
         <a matLine>Categorias</a>
       </mat-list-item>
-      <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/add-product')">
-        <a matLine>Adicionar Produto</a>
-      </mat-list-item>
 
       <mat-list-item>
         <div *ngIf="current_route == '/product-list' || current_route == '/'">
@@ -64,8 +61,8 @@
               <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/categories')">
                 <a matLine>Categorias</a>
               </mat-list-item>
-              <mat-list-item *ngIf="isLoggedIn" (click)="navigateToRoute('/add-product')">
-                <a matLine>Adicionar Produto</a>
+              <mat-list-item (click)="navigateToRoute('/orders')">
+                <a matLine>Pedidos</a>
               </mat-list-item>
               <mat-list-item (click)="navigateToRoute('/payment')">
                 <a matLine>Pagamento</a>
