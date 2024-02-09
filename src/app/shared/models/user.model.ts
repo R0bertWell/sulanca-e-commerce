@@ -1,3 +1,4 @@
+import { Authority } from "./authority.model";
 
 export class User {
   public id: string;
@@ -5,6 +6,8 @@ export class User {
   public email: string;
   public senha: string;
   public perfil: string;
+  public authorities: Authority[] = [];
+
   constructor(element: User) {
 
       this.id = element.id;

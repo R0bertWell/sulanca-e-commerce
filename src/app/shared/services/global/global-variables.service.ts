@@ -13,6 +13,10 @@ export class GlobalVariablesService {
   constructor(public http: HttpClient) {
   }
 
+  updateConfig(config: Config): Observable<Config> {
+    return this.http.put<Config>(`${environment.PATH_API}/configs/general-config/update`, config);
+  }
+
   getConfig(): Observable<Config> {
     return this.http.get<Config>(environment.PATH_API + "/configs");
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 
@@ -10,6 +11,7 @@ import { AuthenticationService } from 'src/app/shared/services/authentication/au
 })
 export class LoginScreenComponent {
   loginForm!: FormGroup;
+  signIn: boolean = true;
   loading = false;
   submitted = false;
   returnUrl: string = '';
@@ -19,6 +21,7 @@ export class LoginScreenComponent {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
+      private _snackBar: MatSnackBar,
       private authenticationService: AuthenticationService
   ) {
       // redirect to home if already logged in
@@ -52,20 +55,46 @@ export class LoginScreenComponent {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f['username'].value, this.f['password'].value).subscribe({
-      next: (response: any) => {
-        console.log("Return url => ", this.returnUrl)
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        //this.router.navigate([this.returnUrl || '/product-list'], {skipLocationChange: true});
-         // this.router.navigate([this.returnUrl]);
-        window.location.reload();
-        this.authenticationService.setUserName(this.f['username'].value);
-      },
-      error: (response: any) => {
-        console.log("Error => ", response)
-          this.error = response;
+    if(this.signIn){
+      this.authenticationService.login(this.f['username'].value, this.f['password'].value).subscribe({
+        next: (response: any) => {
+          console.log("Return url => ", this.returnUrl)
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          //this.router.navigate([this.returnUrl || '/product-list'], {skipLocationChange: true});
+          // this.router.navigate([this.returnUrl]);
+          this.authenticationService.setUserName(this.f['username'].value);
+          window.location.reload();
+        },
+        error: (response: any) => {
+          console.log("Error => ", response)
+            this.error = response;
+            this.loading = false;
+        }
+      });
+    } else {
+      this.authenticationService.signUp(this.f['username'].value, this.f['password'].value).subscribe({
+        next: (response: any) => {
+          console.log("Responsed => ", response)
+          this._snackBar.open(`Usuário '${response.username}' cadastrado com sucesso!`, "Ok", {
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom'
+          })
           this.loading = false;
-      }
-    });
+          this.signIn = true;
+
+        },
+        error: (response: any) => {
+          console.log("Error => ", response)
+            this.error = response;
+            this.loading = false;
+        }
+      });
+    }
+  }
+
+  signUp(signUp: boolean) {
+    this.signIn = !signUp;
+    this.error = '';
   }
 }

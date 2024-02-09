@@ -71,6 +71,7 @@
           </div>
           <div class="header__right-buttons">
             <button mat-button (click)="login()"><mat-icon>person</mat-icon></button>
+            <button mat-button *ngIf="isLoggedIn" (click)="logout()"><mat-icon>logout</mat-icon></button>
             <button class="cart-button" (click)="cart__sidenav.toggle()">
               <mat-icon>shopping_cart</mat-icon>
             </button>

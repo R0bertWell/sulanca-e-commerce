@@ -120,4 +120,16 @@ export class GeneralConfigComponent {
       }
     })*/
   }
+
+  saveGeneralConfig() {
+    this.globalService.updateConfig(this.config).subscribe({
+      next: (response: Config)=> {
+        this.config = response as Config;
+        console.log("Salvo com sucesso!")
+      },
+      error: (error: any)=> {
+        console.log("Deu erro => ", error)
+      }
+    })
+  }
 }

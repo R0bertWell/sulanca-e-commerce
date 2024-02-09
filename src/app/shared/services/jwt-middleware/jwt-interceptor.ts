@@ -7,13 +7,13 @@ import { AuthenticationService } from '../authentication/authentication.service'
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) {
-      console.log("Interceptor working !!!!")
+      //console.log("Interceptor working !!!!")
      }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       // add authorization header with jwt token if available
       let currentUser:any = this.authenticationService.currentUserValue;
-      console.log("Interceptado JWT ! => ", currentUser);
+      //console.log("Interceptado JWT ! => ", currentUser);
 
       if (currentUser && currentUser.jwt) {
           request = request.clone({

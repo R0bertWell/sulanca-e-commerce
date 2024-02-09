@@ -162,8 +162,18 @@ export class AppComponent {
       this.current_route = '/login';
       this.router.navigate([this.current_route], {skipLocationChange: true});
     } else {
-      this.current_route = '/dashboard';
-      this.router.navigate([this.current_route], {skipLocationChange: true});
+      if(this.authService.isNormalUser()){
+        console.log("NORMAL USER ! ")
+        this.current_route = '/user-details'
+        this.router.navigate([this.current_route], {skipLocationChange: true});
+      } else {
+        this.current_route = '/dashboard';
+        this.router.navigate([this.current_route], {skipLocationChange: true});
+      }
     }
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }

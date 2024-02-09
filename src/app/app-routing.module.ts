@@ -8,7 +8,7 @@ import { ColorScreenComponent } from './core/screens/forms/color-screen/color-sc
 import { SizeScreenComponent } from './core/screens/forms/size-screen/size-screen.component';
 import { CategoryScreenComponent } from './core/screens/forms/category-screen/category-screen.component';
 import { LoginScreenComponent } from './core/screens/login-screen/login-screen.component';
-import { authGuard } from './auth/auth.guard';
+import { adminAuthGuard, authGuard, specialAuthGuard } from './auth/auth.guard';
 import { DashboardScreenComponent } from './core/screens/dashboard-screen/dashboard-screen.component';
 import { ConfigScreenComponent } from './core/screens/config-screen/config-screen.component';
 import { PaymentScreenComponent } from './core/screens/payment-screen/payment-screen.component';
@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'sizes', component: SizeScreenComponent, canActivate: [authGuard] },
   { path: 'categories', component: CategoryScreenComponent, canActivate: [authGuard] },
   { path: 'add-product', component: ProductScreenComponent, canActivate: [authGuard] },
-  { path: 'dashboard', component: DashboardScreenComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardScreenComponent, canActivate: [adminAuthGuard] },
   { path: 'config', component: ConfigScreenComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrderScreenComponent },
   { path: 'payment', component: PaymentScreenComponent},
